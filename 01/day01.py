@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
+import sys
 from functools import reduce
 
 def main():
-    with open('input.txt') as input:
+
+    if len(sys.argv) != 2:
+        sys.exit(f"Usage: {sys.argv[0]} input_file")
+
+    with open(sys.argv[1]) as input:
         numbers = [ int(x) for x in input.readlines()]
 
     print_answer( find(numbers, 2020, 2) )

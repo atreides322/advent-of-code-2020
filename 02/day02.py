@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
+import sys
+
 def main():
-    with open('input.txt') as input:
+
+    if len(sys.argv) != 2:
+        sys.exit(f"Usage: {sys.argv[0]} input_file")
+
+    with open(sys.argv[1]) as input:
         passwords = [ {"rule": rule, "password": password } for rule, password in
                         [ x.split(":") for x in input.readlines()]]
 
