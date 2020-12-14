@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+from functools import reduce
 
 def main():
 
@@ -10,9 +11,12 @@ def main():
     with open(sys.argv[1]) as input:
         topography = [ [char for char in line.strip()] for line in input.readlines()]
 
-    dy = 1
-    dx = 3
+    slopes = [(1,1), (1,3), (1,5), (1,7), (2, 1)]
+    solution = [count_trees(topography, dy, dx) for dy, dx in slopes]
 
+    print( solution, "=", reduce((lambda x, y: x * y), solution ) )
+
+def count_trees(topography, dy, dx):
     max_x = len(topography[0])
     x = 0
     trees = 0
@@ -22,7 +26,7 @@ def main():
 
         x = (x + dx) % max_x
 
-    print(trees)
+    return trees
 
 if __name__ == "__main__":
     main()
